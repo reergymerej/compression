@@ -28,7 +28,7 @@ describe('recognizing string patterns', () => {
   describe('finding recurring strings', () => {
     it('should return a list of all uniqe string combinations', () => {
       // const input = 'abcabcabc'
-      const input = 'Hello, how are you?  I am OK.  Do you know what I did today?  I caught my first flounder!  I let him go because he was a bit too small.  Did you know they have big teeth.  It was surprising.'
+      const input = 'Can you find all repeated things?  Kings and rings?  Can you call the ball who brings and sings to me?  Can you?'
       const output = app.getUniqueWords(input)
       expect(output).toEqual(['ll', ' h', '  '])
     })
@@ -42,19 +42,15 @@ describe('recognizing string patterns', () => {
     })
   })
 
-  describe('getLongestWordWithMostIndices', () => {
+  fdescribe('getLongestWordWithMostIndices', () => {
     it('should return exactly what you think', () => {
       const input = [
-        { word: 'abcabcabc', indices: [0] },
-        { word: 'abcabcab', indices: [0] },
-        { word: 'abcabca', indices: [0] },
-        { word: 'abc', indices: [0, 3, 6] },
-        { word: 'ab', indices: [0, 3, 6] },
-        { word: 'a', indices: [0, 3, 6] },
+        { word: 'in', indices: [0, 0, 0, 0, 0, 0] },
+        { word: 'ing', indices: [0, 0, 0, 0, 0] },
       ]
       const output = app.getLongestWordWithMostIndices(input)
       expect(output).toEqual(
-        { word: 'abc', indices: [0, 3, 6] }
+        { word: 'ing', indices: [0, 0, 0, 0, 0] },
       )
     })
   })

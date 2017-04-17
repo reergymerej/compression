@@ -23,6 +23,7 @@ export function getMinimumDifference(numbers) {
 }
 
 export function getLongestWordWithMostIndices(data) {
+  const indexCountsByWord = {}
   const indexCounts = []
   data.forEach(row => {
     const count = row.indices.length
@@ -30,7 +31,12 @@ export function getLongestWordWithMostIndices(data) {
       indexCounts.push(count)
     }
   })
+  data.forEach(row => {
+    indexCountsByWord[row.word] = row.indices.length
+  })
+  console.log({ indexCountsByWord })
   const requiredIndicesCount = Math.max.apply(null, indexCounts)
+  console.log({ requiredIndicesCount })
 
   let currentWinner = null
   data.forEach(row => {
@@ -60,18 +66,24 @@ export function getUniqueWords(input) {
       const overlapsWithOtherInstances = word.length > minIndexDistance
       if (!overlapsWithOtherInstances) {
         // Pick the longest word with the most indices.
-        possibleWords.push({
-          word,
-          indices,
-        })
+        if (indices.length > 1) {
+          if (uniqueWords.indexOf(word) < 0) {
+            possibleWords.push({
+              word,
+              indices,
+            })
+          }
+        }
       }
       length--
     }
     const repeatedWord = getLongestWordWithMostIndices(possibleWords)
     if (repeatedWord.word !== input) {
       if (uniqueWords.indexOf(repeatedWord.word) < 0) {
-        console.log({ repeatedWord })
-        uniqueWords.push(repeatedWord.word)
+        if (uniqueWords.indexOf(repeatedWord.word) < 0) {
+          console.log({ repeatedWord })
+          uniqueWords.push(repeatedWord.word)
+        }
       }
     }
   }
